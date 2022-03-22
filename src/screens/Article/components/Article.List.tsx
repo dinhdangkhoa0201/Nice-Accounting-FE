@@ -17,9 +17,10 @@ export function ArticleList() {
     const [visible, setVisible] = useState(false);
     const [listArticle, setListArticle] = useState(Array<ArticleModel>());
     const [article, setArticle] = useState<ArticleModel>();
+    const [total, setTotal] = useState(0);
     const [criteria, setCriteria] = useState<CriteriaModel>({
         criteria: {},
-        orderBy: ["updateDate desc", "createDate desc"],
+        orderBy: [],
         page: 1,
         perPage: 10
     });
@@ -99,7 +100,7 @@ export function ArticleList() {
         articleAPI.findByCriteria(criteria)
             .then(data => {
                 setListArticle(data.object);
-                console.log("data", data);
+
             })
             .catch(error => {
                 Modal.error({
@@ -112,12 +113,23 @@ export function ArticleList() {
             .finally(() => {
                 setIsLoading(false);
             })
-    }, [])
+    }, [criteria])
+
+    const onChangePage = (page: number, perPage: number) => {
+        if (page && perPage) {
+            setCriteria({
+                ...criteria,
+                page,
+                perPage
+            })
+        }
+    }
 
     const onSelectArticle = (article: ArticleModel) => {
         setVisible(true);
         setArticle(article);
     }
+
     /**
      * END: Function
      */
@@ -129,7 +141,15 @@ export function ArticleList() {
                        rowKey={"id"} key={"index"}
                        loading={isLoading}
                        columns={columns}
-                       dataSource={listArticle}/>
+                       dataSource={listArticle}
+                       pagination={{
+                           current: criteria.page,
+                           pageSize: criteria.perPage,
+                           total: total,
+                           onChange: (page, perPage) => {
+                               onChangePage(page, perPage);
+                           },
+                       }}/>
             </Row>
             <Modal
                 title="View"

@@ -13,8 +13,6 @@ export function Navigation() {
     const location = useLocation();
     const {pathname} = location;
 
-    console.log("pathname", pathname);
-
     const renderMenu = () => {
         return (
             listMenu.map(e => {

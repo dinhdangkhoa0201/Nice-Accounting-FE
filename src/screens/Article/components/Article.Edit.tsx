@@ -50,6 +50,7 @@ export function ArticleEdit(props: Props) {
     const [form] = Form.useForm();
     const [category, setCategory] = useState<CategoryModel>();
     const mdEditor = useRef(null);
+    const [isLoading, setIsLoading] = useState(false);
     const [article, setArticle] = useState<ArticleModel>({
         id: null,
         code: "",
@@ -129,7 +130,7 @@ export function ArticleEdit(props: Props) {
                     Modal.success({
                         title: "Success",
                         icon: <LikeOutlined/>,
-                        okText: "OK2",
+                        okText: "OK",
                         onOk: () => {
                             window.history.back();
                         }
@@ -141,8 +142,6 @@ export function ArticleEdit(props: Props) {
                     closable: false,
                     title: error.message,
                     icon: <DislikeOutlined/>,
-                    onOk: () => {
-                    }
                 })
             })
     }
@@ -211,6 +210,7 @@ export function ArticleEdit(props: Props) {
                                        }
                                    ]}>
                             <Select placeholder={"Chọn Loại Tài Khoản"}
+                                    loading={isLoading}
                                     defaultValue={category?.name}
                                     onSelect={onSelect}>
                                 {

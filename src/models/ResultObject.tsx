@@ -1,5 +1,6 @@
 export interface ResultObject<T> {
     object: T,
     message: string,
-    status: string
+    status: string,
+    total: number
 }

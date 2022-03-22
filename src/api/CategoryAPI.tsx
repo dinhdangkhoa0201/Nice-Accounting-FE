@@ -4,7 +4,7 @@ import {CriteriaModel} from "../models/CriteriaModel";
 import {ResultObject} from "../models/ResultObject";
 import {List} from "antd";
 
-const save = (data: CategoryModel) => {
+function save (data: CategoryModel) : Promise<ResultObject<CategoryModel>> {
     return HttpCommon.post("/category", {
         id: data.id,
         name: data.name,

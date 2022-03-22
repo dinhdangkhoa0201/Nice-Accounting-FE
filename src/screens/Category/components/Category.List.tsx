@@ -17,7 +17,7 @@ export function CategoryList() {
     const [total, setTotal] = useState(0);
     const [criteria, setCriteria] = useState<CriteriaModel>({
         criteria: {},
-        orderBy: ["updateDate desc", "createDate desc"],
+        orderBy: [],
         page: 1,
         perPage: 10
     });
@@ -90,12 +90,22 @@ export function CategoryList() {
         categoryAPI.findByCriteria(criteria)
             .then(data => {
                 setListCategory(data.object);
-                setTotal(data.object.length);
+                setTotal(data.total);
             })
             .finally(() => {
                 setIsLoading(false);
             })
-    }, [])
+    }, [criteria])
+
+    const onChangePage = (page: number, perPage: number) => {
+        if (page && perPage) {
+            setCriteria({
+                ...criteria,
+                page,
+                perPage
+            })
+        }
+    }
     /**
      * END: Function
      */
@@ -105,8 +115,19 @@ export function CategoryList() {
             <Title>Danh Sách Loại Tài Khoản</Title>
             <Row>
                 <Table className={"your-table"}
-                       rowKey={"id"} key={"index"}
-                       loading={isLoading} columns={columns} dataSource={listCategory}/>
+                       rowKey={"id"}
+                       key={"index"}
+                       loading={isLoading}
+                       columns={columns}
+                       dataSource={listCategory}
+                       pagination={{
+                           current: criteria.page,
+                           pageSize: criteria.perPage,
+                           total: total,
+                           onChange: (page, perPage) => {
+                               onChangePage(page, perPage);
+                           },
+                       }}/>
             </Row>
         </>
     )

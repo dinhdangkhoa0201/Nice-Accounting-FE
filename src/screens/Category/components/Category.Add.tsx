@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {Button, Col, DatePicker, Form, Input, Layout, Row, Space, Typography} from "antd";
+import {Button, Col, DatePicker, Form, Input, Layout, Modal, Row, Space, Typography} from "antd";
 import {CategoryModel} from "../../../models/CategoryModel";
 import {categoryAPI} from "../../../api/CategoryAPI";
 import {useParams} from "react-router-dom";
 import moment from "moment";
+import {LikeOutlined} from "@ant-design/icons";
 
 const {Title} = Typography;
 const {TextArea} = Input;
@@ -49,7 +50,16 @@ export function CategoryAdd(props: Props) {
         }
         categoryAPI.save(temp)
             .then(data => {
-
+                if (data.status === "SUCCESS") {
+                    Modal.success({
+                        title: "Success",
+                        icon: <LikeOutlined/>,
+                        okText: "OK",
+                        onOk: () => {
+                            window.history.back();
+                        }
+                    });
+                }
             })
             .catch(error => {
 
