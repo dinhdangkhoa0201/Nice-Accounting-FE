@@ -1,0 +1,35 @@
+[
+    {
+        "name": "Menu 1",
+        "children": [
+            {
+                "name": "Menu Item 1"
+            },
+            {
+                "name": "Menu Item 1"
+            }
+        ]
+    },
+    {
+        "name": "Menu 2",
+        "children": [
+            {
+                "name": "Menu Item 1"
+            },
+            {
+                "name": "Menu Item 1"
+            }
+        ]
+    },
+    {
+        "name": "Menu 3",
+        "children": [
+            {
+                "name": "Menu Item 1"
+            },
+            {
+                "name": "Menu Item 1"
+            }
+        ]
+    }
+]

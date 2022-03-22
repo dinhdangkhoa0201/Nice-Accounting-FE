@@ -1,7 +1,7 @@
-interface BaseModel {
-    id: bigint | null;
-    createBy: string;
-    createDate: Date;
-    updateBt: string;
-    updateDate: Date;
+export interface BaseModel {
+    id: number | null;
+    createBy?: string | null;
+    createDate?: Date | null;
+    updateBy?: string | null;
+    updateDate?: Date | null;
 }

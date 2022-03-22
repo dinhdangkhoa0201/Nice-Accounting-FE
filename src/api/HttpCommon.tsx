@@ -1,14 +1,14 @@
-import axios from "axios";
+import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 
 const axiosClient = axios.create({
-    baseURL: `${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}${process.env.REACT_APP_REQUEST_MAPPING}`,
+    baseURL: `http://${process.env.REACT_APP_SERVER_HOST}:${process.env.REACT_APP_SERVER_PORT}${process.env.REACT_APP_REQUEST_MAPPING}`,
     headers: {
         "Content-Type": "application/json"
     },
     timeout: 100000
 });
 // Add a request interceptor
-axiosClient.interceptors.request.use(function (config) {
+axiosClient.interceptors.request.use(function (config: AxiosRequestConfig) {
     // Do something before request is sent
     return config;
 }, function (error) {
@@ -17,7 +17,7 @@ axiosClient.interceptors.request.use(function (config) {
 });
 
 // Add a response interceptor
-axiosClient.interceptors.response.use(function (response) {
+axiosClient.interceptors.response.use(function (response: AxiosResponse) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     return response.data;
