@@ -57,32 +57,32 @@ export function Navigation() {
 const listMenu = [
     {
         key: "sub1",
-        name: "Category",
+        name: "Loại Tài Khoản",
         icon: "UnderlineOutlined",
         children: [
             {
                 key: "1",
-                name: "List",
+                name: "Danh Sách",
                 path: "/category"
             }, {
                 key: "2",
-                name: "Add",
+                name: "Thêm",
                 path: "/category/add"
             }
         ]
     },
     {
         key: "sub2",
-        name: "Article",
+        name: "Tài Khoản",
         icon: "UnderlineOutlined",
         children: [
             {
                 key: "3",
-                name: "List",
+                name: "Danh Sách",
                 path: "/article"
             }, {
                 key: "4",
-                name: "Add",
+                name: "Thêm",
                 path: "/article/add"
             }
         ]

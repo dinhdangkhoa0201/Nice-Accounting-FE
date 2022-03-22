@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {v4 as uuid} from "uuid";
 import {CategoryModel} from "../../../models/CategoryModel";
 import {Button, Modal, Row, Space, Table, Typography} from "antd";
@@ -6,6 +6,9 @@ import {DislikeOutlined, EditOutlined, FolderViewOutlined} from "@ant-design/ico
 import {CriteriaModel} from "../../../models/CriteriaModel";
 import {ArticleModel} from "../../../models/ArticleModel";
 import {articleAPI} from "../../../api/ArticleAPI";
+import Editor from "react-markdown-editor-lite";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const {Title} = Typography;
 
@@ -18,6 +21,7 @@ export function ArticleList() {
     const [listArticle, setListArticle] = useState(Array<ArticleModel>());
     const [article, setArticle] = useState<ArticleModel>();
     const [total, setTotal] = useState(0);
+    const mdEditor = useRef(null);
     const [criteria, setCriteria] = useState<CriteriaModel>({
         criteria: {},
         orderBy: [],
@@ -156,10 +160,9 @@ export function ArticleList() {
                 centered
                 visible={visible}
                 onOk={() => setVisible(false)}
-                width={1500}
+                width={1000}
             >
-                <span style={{display: "inline-block"}}
-                      dangerouslySetInnerHTML={{__html: article?.content ? article.content : ""}}/>
+                <ReactMarkdown children={article?.content ? article.content : ""} remarkPlugins={[remarkGfm]} />
             </Modal>
         </>
     )

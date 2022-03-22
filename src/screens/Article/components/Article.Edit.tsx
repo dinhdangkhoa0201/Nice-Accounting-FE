@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Button, Col, DatePicker, Form, Input, Layout, Modal, Row, Select, Space, Typography} from "antd";
-import "react-markdown-editor-lite/lib/index.css"
 import "jodit/build/jodit.css"
 import {ArticleModel} from "../../../models/ArticleModel";
 import {articleAPI} from "../../../api/ArticleAPI";
@@ -164,8 +163,6 @@ export function ArticleEdit(props: Props) {
     }
 
     const onEditorChange = ({html, text}: any) => {
-        console.log("onEditChange html", html);
-        console.log("onEditChange text", text);
         setContent(text);
     }
 
